@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name=".mylyn1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Assignment1/List/.metadata/.mylyn/tasks.xml.zip!/" />
+      <root url="jar://$PROJECT_DIR$/Assignment1/List/.metadata/.mylyn/repositories.xml.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

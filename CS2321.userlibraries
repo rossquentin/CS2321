@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name=".mylyn">
+    <archive path="C:/Users/quent/IdeaProjects/CS2321/Assignment1/List/.metadata/.mylyn/tasks.xml.zip" />
+    <archive path="C:/Users/quent/IdeaProjects/CS2321/Assignment1/List/.metadata/.mylyn/repositories.xml.zip" />
+  </library>
+  <library name=".mylyn1">
+    <archive path="C:/Users/quent/IdeaProjects/CS2321/Assignment1/List/.metadata/.mylyn/tasks.xml.zip" />
+    <archive path="C:/Users/quent/IdeaProjects/CS2321/Assignment1/List/.metadata/.mylyn/repositories.xml.zip" />
+  </library>
+  <library name=".mylyn2">
+    <archive path="C:/Users/quent/IdeaProjects/CS2321/Assignment2/StackQueueApplication/.metadata/.mylyn/repositories.xml.zip" />
+    <archive path="C:/Users/quent/IdeaProjects/CS2321/Assignment2/StackQueueApplication/.metadata/.mylyn/tasks.xml.zip" />
+  </library>
+  <library name="jug-1.1">
+    <archive path="C:/Users/quent/IdeaProjects/CS2321/Assignment1/List/lib/jug-1.1.jar" />
+  </library>
+  <library name="jug-1.11">
+    <archive path="C:/Users/quent/IdeaProjects/CS2321/Assignment1/List/lib/jug-1.1.jar" />
+  </library>
+  <library name="jug-1.12">
+    <archive path="C:/Users/quent/IdeaProjects/CS2321/Assignment2/StackQueueApplication/lib/jug-1.1.jar" />
+  </library>
+</eclipse-userlibraries>
+

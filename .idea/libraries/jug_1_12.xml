@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jug-1.12">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Assignment2/StackQueueApplication/lib/jug-1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
