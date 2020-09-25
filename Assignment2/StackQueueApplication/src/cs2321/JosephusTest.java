@@ -60,5 +60,4 @@ public class JosephusTest {
             assertEquals(person, outcome.removeFirst());
         }
 	}
-
 }
