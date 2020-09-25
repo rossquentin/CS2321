@@ -1,7 +1,6 @@
 package cs2321;
 
 public class PostfixExpression {
-	
 	/**
 	 * Evaluate a postfix expression. 
 	 * Postfix expression notation has operands first, following by the operations.
@@ -26,9 +25,15 @@ public class PostfixExpression {
 	    // Loops through all tokens.
         for (String token : tokens) {
             // If the token is a number, push it to the stack, then go to the next token.
-            if (Character.isDigit(token.charAt(0))) {
+            if (isNumeric(token)) {
                 stack.push(Integer.parseInt(token));
                 continue;
+            }
+
+            // If the token is not a number defined above and the token is not an operator,
+            // as they have a length of 1, then it is not a valid operation.
+            else if (token.length() > 1) {
+                throw new IllegalArgumentException("Invalid input");
             }
 
             // Gets the first and second term from the stack.
@@ -62,4 +67,18 @@ public class PostfixExpression {
 
 		return result;
 	}
+
+    /**
+     * Gets the precedence of a given operator, ranging from 1 for the lowest, to 3 for the highest.
+     * @param str the operator to test
+     * @return the precedence of an operator
+     */
+    private static boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
