@@ -261,4 +261,12 @@ public class ArrayList<E> implements List<E> {
             arr = tmp;
         }
     }
+
+    /**
+     * Converts the arraylist to an array.
+     * @return the data array
+     */
+    public E[] toArray() {
+        return arr;
+    }
 }
