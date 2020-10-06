@@ -125,13 +125,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
 	 * This method is purely for testing purpose of auto-grader
 	 */
 	Object[] data() {
-        Object[] data = new Object[heap.size()];
-
-        for (int i = 0; i < heap.size(); i++) {
-            data[i] = heap.get(i);
-        }
-
-		return data;
+        return heap.toArray();
 	}
 
     /**
