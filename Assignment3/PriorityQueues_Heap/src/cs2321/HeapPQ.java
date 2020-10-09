@@ -27,7 +27,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
 	}
 
     /**
-     * Inner PQEntry class which implements PQEntry
+     * Inner PQEntry class which implements Entry
      * @param <K>
      * @param <V>
      */
@@ -309,7 +309,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @param entry  an entry of this priority queue
      * @throws IllegalArgumentException if the entry is not valid
      */
-	@Override
+    @Override
 	public void remove(Entry<K, V> entry) throws IllegalArgumentException {
 	    // Validates and returns a PQEntry given the entry.
 		PQEntry<K,V> locator = validate(entry);
