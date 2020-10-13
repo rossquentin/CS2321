@@ -329,4 +329,27 @@ public class HeapPQTest {
 		assertEquals(2, heappq.size());
 		
 	}
+
+	@Test
+    public void testLargeRemoveMin1() {
+        for (int i = 1; i <= 500; i++) {
+            heappq.insert(i,"A");
+        }
+        Object[] data = heappq.data();
+        for (int i = 1; i < 500; i++) {
+            assertEquals((Integer) i, heappq.removeMin().getKey());
+        }
+    }
+
+    @Test
+    public void testLargeRemoveMin2() {
+	    int size = 500;
+        for (int i = size; i > 0; i--) {
+            heappq.insert(i,"A");
+        }
+        Object[] data = heappq.data();
+        for (int i = size; i > 0; i--) {
+            assertEquals((Integer)(size+1-i) , heappq.removeMin().getKey());
+        }
+    }
 }

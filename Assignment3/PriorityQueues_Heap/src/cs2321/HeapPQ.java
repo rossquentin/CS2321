@@ -80,6 +80,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @param i     the index to test
      * @return      the parent index of index i
      */
+    @TimeComplexity("O(1)")
 	private int parent(int i) {
 	    return (i-1)/2;
     }
@@ -89,6 +90,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @param i     the index to test
      * @return      the left child index of index i
      */
+    @TimeComplexity("O(1)")
     private int leftChild(int i) {
 	    return 2*i + 1;
     }
@@ -98,6 +100,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @param i     the index to test
      * @return      the right child index of index i.
      */
+    @TimeComplexity("O(1)")
     private int rightChild(int i) {
 	    return 2*i + 2;
     }
@@ -107,6 +110,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @param i     the index to test
      * @return      true if index i has a left child, false otherwise
      */
+    @TimeComplexity("O(1)")
     private boolean hasLeft(int i) {
 	    return leftChild(i) < heap.size();
     }
@@ -116,6 +120,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @param i     the index to test
      * @return      true if index i has a right child, false otherwise
      */
+    @TimeComplexity("O(1)")
     private boolean hasRight(int i) {
 	    return rightChild(i) < heap.size();
     }
@@ -124,6 +129,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
 	 * Return the data array that is used to store entries  
 	 * This method is purely for testing purpose of auto-grader
 	 */
+    @TimeComplexity("O(1)")
 	Object[] data() {
         return heap.toArray();
 	}
@@ -133,6 +139,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @param i     the first entry to swap
      * @param j     the second entry to swap
      */
+    @TimeComplexity("O(1)")
 	private void swap(int i, int j) {
 	    Entry<K,V> temp = heap.get(i);
 	    heap.set(i, heap.get(j));
@@ -147,6 +154,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @return          a PQEntry if the entry is valid
      * @throws IllegalArgumentException if the entry is not valid
      */
+    @TimeComplexity("O(1)")
     private PQEntry<K,V> validate(Entry<K,V> entry) throws IllegalArgumentException {
         // Tests if the entry is an instance of a PQEntry.
 	    if (!(entry instanceof PQEntry)) throw new IllegalArgumentException("Invalid entry");
@@ -167,6 +175,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @return      true if the key is valid, false otherwise
      * @throws IllegalArgumentException if the key is not valid
      */
+    @TimeComplexity("O(1)")
     private boolean checkKey(K key) throws IllegalArgumentException {
         try {
             // Tests if the key can be compared to itself.
@@ -182,6 +191,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @param b     the second key to test
      * @return      a positive integer if a > b, 0 if a = b, and a negative integer if a < b
      */
+    @TimeComplexity("O(1)")
     private int compare(Entry<K,V> a, Entry<K,V> b) {
 	    return comparator.compare(a.getKey(), b.getKey());
     }
@@ -190,46 +200,67 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * Maintains the heap property at a given index.
      * @param j the index to start maintaining at
      */
+    @TimeComplexity("O(lg n)")
     private void maintainHeap(int j) {
-        // Test if index j is less than the parent. If true, upheap.
-	    if (j > 0 && compare(heap.get(j), heap.get(parent(j))) < 0) {
-	        upheap(j);
-        }
-	    // Otherwise, downheap.
-	    else {
-	        downheap(j);
-        }
+        upheap(j);
+        downheap(j);
     }
 	
 	/**
 	 * The entry should be bubbled up to its appropriate position 
 	 * @param j move the entry at index j higher if necessary, to restore the heap property
 	 */
+	@TimeComplexity("O(lg n)")
 	public void upheap(int j) {
+        /* TCJ
+         * If the entry at index j violates the heap property, the entry must be pushed up the heap
+         * until the heap property is restored.
+         * At worst case when j=size-1 and the entry at j is the smallest entry, there will be log(size) swaps.
+         * The method calls parent(), compare(), and swap() are all O(1).
+         * The worst case time complexity of the upheap method is O(logn) where n is the size of the heap.
+         */
         while (j > 0) {
             int p = parent(j);
+
+            // If the parent is less than the child, the heap property is restored.
             if(compare(heap.get(j), heap.get(p)) >= 0) break;
+
+            // Otherwise swap the two.
             swap(j, p);
             j = p;
         }
 	}
 	
-	/**
-	 * The entry should be bubbled down to its appropriate position 
+	 /** The entry should be bubbled down to its appropriate position 
 	 * @param j move the entry at index j lower if necessary, to restore the heap property
 	 */
-	
+	@TimeComplexity("O(lg n)")
 	public void downheap(int j) {
+        /* TCJ
+         * If the entry at index j violates the heap property, the entry must be pushed down the heap
+         * until the heap property is restored.
+         * At worst case when j=0 and the entry at j is the largest entry, there will be log(size) swaps.
+         * The method calls hasLeft(), leftChild(), rightChild(), compare(), and swap() are all O(1).
+         * The worst case time complexity of the downheap method is O(lg n) where n is the size of the heap.
+         */
         while (hasLeft(j)) {
+            // Get the left child's index and assume its the smallest child.
             int leftIndex = leftChild(j);
             int smallestChildIndex = leftIndex;
+
+            // If it has a right child
             if (hasRight(j)) {
+                // Get the right child's index, then set the smallest child index to the smaller of the two.
                 int rightIndex = rightChild(j);
                 if(compare(heap.get(leftIndex), heap.get(rightIndex)) > 0) {
                     smallestChildIndex = rightIndex;
                 }
             }
-            if (compare(heap.get(leftIndex), heap.get(j)) >= 0) break;
+
+            // If the heap property is restored, break out of the loop.
+            if (compare(heap.get(smallestChildIndex), heap.get(j)) >= 0) break;
+
+            // Otherwise, swap the two entries and set j to the smallest child index.
             swap(j, smallestChildIndex);
             j = smallestChildIndex;
         }
@@ -240,6 +271,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @return the size of the priority queue
      */
 	@Override
+    @TimeComplexity("O(1)")
 	public int size() {
 		return heap.size();
 	}
@@ -249,6 +281,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @return true if there are no elements in the priority queue, false otherwise
      */
 	@Override
+    @TimeComplexity("O(1)")
 	public boolean isEmpty() {
 		return heap.isEmpty();
 	}
@@ -261,7 +294,19 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @throws IllegalArgumentException if the key is not valid
      */
 	@Override
+    @TimeComplexity("O(lg n)")
+    @TimeComplexityAmortized("O(n)")
 	public Entry<K, V> insert(K key, V value) throws IllegalArgumentException {
+        /* TCJ
+         * If the newly inserted at the end of the heap violates the heap property, the entry must be upheaped.
+         * At worst case when the new entry is the smallest entry, upheap will perform at O(lg n).
+         * The method call checkKey() is O(1).
+         * The method call addLast() is O(1) when size < capacity, otherwise it is O(n).
+         * The method call upheap() is O(lg n).
+         * The worst case time complexity of the insert method is O(n) where n is the size of the heap
+         * and the arraylist has reached capacity.
+         * The worst case amortized time complexity of the insert method is O(lg n) where n is the size of the heap.
+         */
 	    // Tests if key is valid.
         checkKey(key);
 
@@ -279,6 +324,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @return the minimum entry of the priority queue, null if the priority queue is empty
      */
 	@Override
+    @TimeComplexity("O(1)")
 	public Entry<K, V> min() {
         if (heap.isEmpty()) return null;
 
@@ -290,6 +336,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @return the minimum entry of the priority queue, null if the priority queue is empty
      */
 	@Override
+    @TimeComplexity("O(lg n)")
 	public Entry<K, V> removeMin() {
         if (heap.isEmpty()) return null;
 
@@ -310,6 +357,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @throws IllegalArgumentException if the entry is not valid
      */
     @Override
+    @TimeComplexity("O(lg n)")
 	public void remove(Entry<K, V> entry) throws IllegalArgumentException {
 	    // Validates and returns a PQEntry given the entry.
 		PQEntry<K,V> locator = validate(entry);
@@ -336,6 +384,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @throws IllegalArgumentException if either the entry or the key are not valid.
      */
 	@Override
+    @TimeComplexity("O(lg n)")
 	public void replaceKey(Entry<K, V> entry, K key) throws IllegalArgumentException {
         // Validates and returns a PQEntry given the entry.
         PQEntry<K,V> locator = validate(entry);
@@ -355,6 +404,7 @@ public class HeapPQ<K,V> implements AdaptablePriorityQueue<K,V> {
      * @throws IllegalArgumentException if the entry is not valid
      */
 	@Override
+    @TimeComplexity("O(1)")
 	public void replaceValue(Entry<K, V> entry, V value) throws IllegalArgumentException {
         // Validates and returns a PQEntry given the entry.
 		PQEntry<K,V> locator = validate(entry);
