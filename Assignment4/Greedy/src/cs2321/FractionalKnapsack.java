@@ -19,31 +19,36 @@ public class FractionalKnapsack {
 	 * @return The maximum total benefit. Please use double type operation. For example 5/2 = 2.5
 	 * 		 
 	 */
+	@TimeComplexity("O(n lg n)")
 	public static double MaximumValue(int[][] items, int knapsackWeight) {
-		 //TODO: Don't forget to modify the return value
         int totalWeight = 0;
         int benefit = 0;
         HeapPQ<Integer, Integer> pq = new HeapPQ<>(new MaximumComparator<>());
 
+        // Insert all items into the PQ, with the key being b/w and the value being b.
         for (int[] item : items) {
             pq.insert(item[1]/item[0], item[0]);
         }
 
-        while (totalWeight < knapsackWeight) {
+        while (!pq.isEmpty()) {
+            // Get the item with the highest value.
             Entry<Integer,Integer> current = pq.removeMin();
             int currentValue = current.getKey();
             int currentWeight = current.getValue();
 
+            // If adding the item's weight would overload the knapsack,
+            // Add the maximum amount you can before overloading the knapsack.
             if (totalWeight + currentWeight > knapsackWeight) {
-                int difference = totalWeight + currentValue - knapsackWeight;
-                totalWeight += difference;
-                benefit += currentValue * difference;
+                benefit += currentValue * (knapsackWeight - totalWeight);
+                break;
             }
-            else {
-                benefit += currentValue * currentWeight;
-                totalWeight += currentWeight;
-            }
+
+            // Otherwise, add the value and weight of the item to the knapsack.
+            benefit += currentValue * currentWeight;
+            totalWeight += currentWeight;
         }
+
+        // Return the total value of the knapsack.
 		return benefit;
 	}
 }
