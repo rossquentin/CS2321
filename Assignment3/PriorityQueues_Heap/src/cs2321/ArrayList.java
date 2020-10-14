@@ -154,6 +154,9 @@ public class ArrayList<E> implements List<E> {
             arr[j] = arr[j+1];
         }
 
+        // Set end of array to null. This element does not exist.
+        arr[size-1] = null;
+
         // Reduces the size by one.
         size--;
 
