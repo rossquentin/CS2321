@@ -1,5 +1,7 @@
 package cs2321;
 
+import net.datastructures.Entry;
+
 /**
  * @author:
  *
@@ -19,6 +21,29 @@ public class FractionalKnapsack {
 	 */
 	public static double MaximumValue(int[][] items, int knapsackWeight) {
 		 //TODO: Don't forget to modify the return value
-		return 0;
+        int totalWeight = 0;
+        int benefit = 0;
+        HeapPQ<Integer, Integer> pq = new HeapPQ<>(new MaximumComparator<>());
+
+        for (int[] item : items) {
+            pq.insert(item[1]/item[0], item[0]);
+        }
+
+        while (totalWeight < knapsackWeight) {
+            Entry<Integer,Integer> current = pq.removeMin();
+            int currentValue = current.getKey();
+            int currentWeight = current.getValue();
+
+            if (totalWeight + currentWeight > knapsackWeight) {
+                int difference = totalWeight + currentValue - knapsackWeight;
+                totalWeight += difference;
+                benefit += currentValue * difference;
+            }
+            else {
+                benefit += currentValue * currentWeight;
+                totalWeight += currentWeight;
+            }
+        }
+		return benefit;
 	}
 }
