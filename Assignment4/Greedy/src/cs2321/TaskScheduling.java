@@ -1,5 +1,8 @@
 package cs2321;
 
+/**
+ * @author Quentin Ross
+ */
 public class TaskScheduling {
 	/**
 	 * Goal: Perform all the tasks using a minimum number of machines. 

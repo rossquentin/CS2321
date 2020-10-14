@@ -3,7 +3,7 @@ package cs2321;
 import net.datastructures.Entry;
 
 /**
- * @author:
+ * @author: Quentin Ross
  *
  */
 public class FractionalKnapsack {
