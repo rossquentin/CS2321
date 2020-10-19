@@ -7,8 +7,6 @@ import net.datastructures.Entry;
  *
  */
 public class FractionalKnapsack {
-
-   
 	/**
 	 * Goal: Choose items with maximum total benefit but with weight at most W.
 	 *       You are allowed to take fractional amounts from items.
@@ -22,7 +20,7 @@ public class FractionalKnapsack {
 	@TimeComplexity("O(n lg n)")
 	public static double MaximumValue(int[][] items, int knapsackWeight) {
         int totalWeight = 0;
-        int benefit = 0;
+        double benefit = 0;
         HeapPQ<Integer, Integer> pq = new HeapPQ<>(new MaximumComparator<>());
 
         // Insert all items into the PQ, with the key being b/w and the value being b.
