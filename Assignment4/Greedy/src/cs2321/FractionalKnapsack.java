@@ -24,17 +24,17 @@ public class FractionalKnapsack {
         int totalWeight = 0;
         double benefit = 0;
 
-        Comparator<Integer> comp = (a, b) -> -1*((Comparable <Integer>) a).compareTo(b);
-        HeapPQ<Integer, Integer> pq = new HeapPQ<>(comp);
+        Comparator<Double> comp = (a, b) -> -1*((Comparable <Double>) a).compareTo(b);
+        HeapPQ<Double, Integer> pq = new HeapPQ<>(comp);
 
         // Insert all items into the PQ, with the key being b/w and the value being b.
         for (int[] item : items) {
-            pq.insert(item[1]/item[0], item[0]);
+            pq.insert((double) item[1] / (double) item[0], item[0]);
         }
 
         while (!pq.isEmpty() && totalWeight < knapsackWeight) {
             // Get the item with the highest value.
-            int currentValue = pq.min().getKey();
+            double currentValue = pq.min().getKey();
             int currentWeight = pq.min().getValue();
 
             // Add the maximum amount of benefit and weight allowed to the knapsack.
