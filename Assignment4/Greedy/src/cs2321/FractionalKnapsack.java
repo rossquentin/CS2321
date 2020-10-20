@@ -2,6 +2,8 @@ package cs2321;
 
 import net.datastructures.Entry;
 
+import java.util.Comparator;
+
 /**
  * @author: Quentin Ross
  *
@@ -17,11 +19,13 @@ public class FractionalKnapsack {
 	 * @return The maximum total benefit. Please use double type operation. For example 5/2 = 2.5
 	 * 		 
 	 */
-	@TimeComplexity("O(n lg n)")
+    @TimeComplexity("O(n lg n)")
 	public static double MaximumValue(int[][] items, int knapsackWeight) {
         int totalWeight = 0;
         double benefit = 0;
-        HeapPQ<Integer, Integer> pq = new HeapPQ<>(new MaximumComparator<>());
+
+        Comparator<Integer> comp = (a, b) -> -1*((Comparable <Integer>) a).compareTo(b);
+        HeapPQ<Integer, Integer> pq = new HeapPQ<>(comp);
 
         // Insert all items into the PQ, with the key being b/w and the value being b.
         for (int[] item : items) {
