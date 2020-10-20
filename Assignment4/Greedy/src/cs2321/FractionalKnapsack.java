@@ -15,7 +15,7 @@ public class FractionalKnapsack {
 	 *       
 	 * @param items items[i][0] is weight for item i
 	 *              items[i][1] is benefit for item i
-	 * @param knapsackWeight
+	 * @param knapsackWeight    maximum capacity of the knapsack
 	 * @return The maximum total benefit. Please use double type operation. For example 5/2 = 2.5
 	 * 		 
 	 */
