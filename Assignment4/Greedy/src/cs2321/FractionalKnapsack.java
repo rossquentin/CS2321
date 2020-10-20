@@ -32,22 +32,16 @@ public class FractionalKnapsack {
             pq.insert(item[1]/item[0], item[0]);
         }
 
-        while (!pq.isEmpty()) {
+        while (!pq.isEmpty() && totalWeight < knapsackWeight) {
             // Get the item with the highest value.
-            Entry<Integer,Integer> current = pq.removeMin();
-            int currentValue = current.getKey();
-            int currentWeight = current.getValue();
+            int currentValue = pq.min().getKey();
+            int currentWeight = pq.min().getValue();
 
-            // If adding the item's weight would overload the knapsack,
-            // Add the maximum amount you can before overloading the knapsack.
-            if (totalWeight + currentWeight > knapsackWeight) {
-                benefit += currentValue * (knapsackWeight - totalWeight);
-                break;
-            }
-
-            // Otherwise, add the value and weight of the item to the knapsack.
-            benefit += currentValue * currentWeight;
+            // Add the maximum amount of benefit and weight allowed to the knapsack.
+            benefit += currentValue * Math.min(currentWeight, knapsackWeight-totalWeight);
             totalWeight += currentWeight;
+
+            pq.removeMin();
         }
 
         // Return the total value of the knapsack.
