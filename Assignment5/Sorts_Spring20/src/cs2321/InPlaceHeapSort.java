@@ -8,6 +8,6 @@ public class InPlaceHeapSort<K extends Comparable<K>> implements Sorter<K> {
 	 */
 	public void sort(K[] array) {
 		// TODO Auto-generated method stub
-	}
+    }
 
 }
