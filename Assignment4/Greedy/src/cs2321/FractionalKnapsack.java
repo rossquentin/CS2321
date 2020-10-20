@@ -41,6 +41,7 @@ public class FractionalKnapsack {
             benefit += currentValue * Math.min(currentWeight, knapsackWeight-totalWeight);
             totalWeight += currentWeight;
 
+            // Finished with all calculations. Remove maximum element.
             pq.removeMin();
         }
 
