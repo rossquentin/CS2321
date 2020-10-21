@@ -42,4 +42,12 @@ public class FractionalKnapsackTest {
         double expected = 7.5;
         assertEquals(expected, FractionalKnapsack.MaximumValue(arr, W),0.001);
     }
+
+    @Test
+    public void testMaximumValueEmpty() {
+	    int[][] arr = {};
+	    int W = 10;
+	    double expected = 0;
+	    assertEquals(expected, FractionalKnapsack.MaximumValue(arr,W), 0.001);
+    }
 }
