@@ -23,7 +23,7 @@ public class InPlaceHeapSort<K extends Comparable<K>> implements Sorter<K> {
 
         // Swap the first element in the array with the last one still in the heap,
         // then downheap all elements in the interval [0, i) where i is the
-        // index of the swapped element.
+        // original index of the swapped element.
         for (int i = n-1; i >= 1 ; i--) {
             swap(array, 0,i);
             downheap(array, 0, i);
