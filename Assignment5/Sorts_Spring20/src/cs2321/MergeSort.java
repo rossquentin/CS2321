@@ -14,7 +14,7 @@ public class MergeSort<E extends Comparable<E>> implements Sorter<E> {
      * @param n     the size of the array
      */
 	private void mergeSort(E[] array, int n) {
-	    if (array.length <= 1) {
+	    if (n <= 1) {
 	        return;
         }
 
