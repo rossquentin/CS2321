@@ -49,7 +49,7 @@ public class InPlaceHeapSort<K extends Comparable<K>> implements Sorter<K> {
     }
 
     /**
-     * Downheaps an element i to it's correct place or until i >= j.
+     * Downheaps an element until the max-heap property is restored.
      * @param array the array to perform the downheap on
      * @param i     the index of the element to downheap
      * @param j     the maximum index that i could be
