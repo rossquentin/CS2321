@@ -6,8 +6,13 @@ public class InPlaceSelectionSort<K extends Comparable<K>> implements Sorter<K> 
 	 * sort - Perform an in-place selection sort
 	 * @param array - Array to sort
 	 */
-	
+	@TimeComplexity("O(n^2)")
 	public void sort(K[] array) {
+        /* TCJ
+         * Selection sort will swap the minimum item A[j] with the current pointer A[i]
+         * Selection sort loops through all n items, at worst and best case, n times.
+         * At worst and best case, selection sort is O(n^2), where n is the size of the array.
+         */
 	    selectionSort(array, array.length);
 	}
 

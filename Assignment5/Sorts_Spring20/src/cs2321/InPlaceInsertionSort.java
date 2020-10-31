@@ -6,7 +6,14 @@ public class InPlaceInsertionSort<K extends Comparable<K>> implements Sorter<K> 
 	 * sort - Perform an in-place insertion sort
 	 * @param array - Array to sort
 	 */
+	@TimeComplexity("O(n^2)")
 	public void sort(K[] array) {
+        /* TCJ
+         * Insertion sort will swap items until A[i] > A[i-1].
+         * When i = n - 1 and A[i] is the smallest item in the array, there are n swaps.
+         * Insertion Sort will loop through all n items in the array and perform, at worst, n swaps.
+         * At worst case, for n items and n swaps, insertion sort is O(n^2)
+         */
         insertionSort(array , array.length);
 	}
 

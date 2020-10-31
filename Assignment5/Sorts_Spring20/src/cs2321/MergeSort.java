@@ -4,7 +4,15 @@ import static java.util.Arrays.copyOfRange;
 
 public class MergeSort<E extends Comparable<E>> implements Sorter<E> {
 
+    @TimeComplexity("O(n lg n)")
 	public void sort(E[] array) {
+        /* TCJ
+         * Merge sort divides an array nearly or completely evenly in half, then sorts the half's recursively.
+         * The maximum depth of the recursive call is log_2(n) where n is the size of the array.
+         * At each recursive call, when merging two sub arrays, there is a linear scan which compares
+         * the two array's current minimum element not inserted in the combined array.
+         * At worst and best case, merge sort is O(n lg n), where n is the size of the array.
+         */
         mergeSort(array, array.length);
 	}
 

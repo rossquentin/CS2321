@@ -2,7 +2,22 @@ package cs2321;
 
 public class QuickSort<E extends Comparable<E>> implements Sorter<E> {
 
+    @TimeComplexity("O(n^2)")
+    @TimeComplexityExpected("O(n lg n)")
 	public void sort(E[] array) {
+        /* TCJ
+         * Quick sort selects a pivot and splits the array into sub arrays where the subarray to the left
+         * of the pivot is less than the pivot and the subarray to the right of the pivot is greater than
+         * the pivot.
+         * At worst case, when the pivot is either the largest or smallest element in every sub array,
+         * there is a maximum depth of n. At each depth, there is a linear scan performed which compares
+         * an element with the pivot.
+         * At the expected case, every two pivots will likely split the array into two fairly even sub arrays
+         * which leads to a maximum depth of log_2(n), where n is the size of the array. There is still a linear
+         * scan performed at each depth.
+         * At worst case, Quick sort is O(n^2), where n is the size of the array.
+         * At the expected case, Quick sort is O(n lg n), where n is the size of the array.
+         */
         quickSort(array, 0, array.length - 1);
 	}
 

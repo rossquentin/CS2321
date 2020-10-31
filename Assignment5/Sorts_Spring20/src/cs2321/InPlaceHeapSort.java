@@ -6,7 +6,14 @@ public class InPlaceHeapSort<K extends Comparable<K>> implements Sorter<K> {
 	 * sort - Perform an in-place heap sort
 	 * @param array - Array to sort
 	 */
+	@TimeComplexity("O(n lg n)")
 	public void sort(K[] array) {
+	    /* TCJ
+	     * Heap sort will swap n - 1 items from the top of the heap to the end of the heap.
+	     * This will lead to a maximum of lg n swaps in the downheap of the swapped item.
+	     * Downheap is lg n, heapSort calls downheap n - 1 times.
+	     * At worst case when i = n - 1, where n is the size of the heap, it is O(n lg n).
+	     */
 	    heapSort(array, array.length);
     }
 
