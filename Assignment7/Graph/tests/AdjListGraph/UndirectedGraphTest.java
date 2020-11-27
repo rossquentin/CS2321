@@ -36,15 +36,15 @@ public class UndirectedGraphTest {
 		org.junit.Assert.assertEquals("Verifying insertEdge method", (Object)(false), (Object)(e1.getElement()==null));
 	}
 
-	@org.junit.Test(timeout=15000)
-	@jug.TestName("Verifying removeVertex method")
-	public void Test3() throws Throwable {
-		Vertex<String> v1 = TARGET.insertVertex("alice");
-		Vertex<String> v2 = TARGET.insertVertex("bob");
-		TARGET.removeVertex(v1);
-		
-		org.junit.Assert.assertEquals("Verifying removeVertex method", (Object)(0), (Object)(TARGET.outDegree(v1)));
-	}
+//	@org.junit.Test(timeout=15000)
+//	@jug.TestName("Verifying removeVertex method")
+//	public void Test3() throws Throwable {
+//		Vertex<String> v1 = TARGET.insertVertex("alice");
+//		Vertex<String> v2 = TARGET.insertVertex("bob");
+//		TARGET.removeVertex(v1);
+//
+//		org.junit.Assert.assertEquals("Verifying removeVertex method", (Object)(0), (Object)(TARGET.outDegree(v1)));
+//	}
 
 	@org.junit.Test(timeout=15000)
 	@jug.TestName("Verifying removeEdge method")
