@@ -122,7 +122,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
 
         GraphEdge<E> edge = (GraphEdge<E>) e;           // Safe cast
 
-        if (edge.getPosition() == null) return null;    // Edge is defunct
+        if (edge.getPosition() == null) throw new IllegalArgumentException("Invalid edge");    // Edge is defunct
         return edge;
     }
 
@@ -139,7 +139,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
 
         GraphVertex<V> vertex = (GraphVertex<V>) v;     // Safe cast
 
-        if (vertex.getPosition() == null) return null;  // Vertex is defunct
+        if (vertex.getPosition() == null) throw new IllegalArgumentException("Invalid vertex");  // Vertex is defunct
         return vertex;
     }
 
@@ -258,6 +258,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     public void removeEdge(Edge<E> e) throws IllegalArgumentException {
         GraphEdge<E> edge = validate(e);
         edges.remove(edge.getPosition());
+        edge.setPosition(null);
     }
 
     /* (non-Javadoc)
@@ -272,6 +273,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
             removeEdge(e);
         }
         vertices.remove(vertex.getPosition());              // Remove the vertex's position
+        vertex.setPosition(null);
     }
 
     /*
