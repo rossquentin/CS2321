@@ -146,6 +146,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#edges()
      */
+    @TimeComplexity("O(1)")
     public Iterable<Edge<E>> edges() {
         return edges;
     }
@@ -153,6 +154,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#vertices()
      */
+    @TimeComplexity("O(1)")
     public Iterable<Vertex<V>> vertices() {
         return vertices;
     }
@@ -160,6 +162,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#numEdges()
      */
+    @TimeComplexity("O(1)")
     public int numEdges() {
         return edges.size();
     }
@@ -167,35 +170,41 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#numVertices()
      */
+    @TimeComplexity("O(1)")
     public int numVertices() {
         return vertices.size();
     }
 
     @Override
+    @TimeComplexity("O(1)")
     public int outDegree(Vertex<V> v) throws IllegalArgumentException {
         GraphVertex<V> vertex = validate(v);
         return vertex.getOutgoing().size();
     }
 
     @Override
+    @TimeComplexity("O(1)")
     public int inDegree(Vertex<V> v) throws IllegalArgumentException {
         GraphVertex<V> vertex = validate(v);
         return vertex.getIncoming().size();
     }
 
     @Override
+    @TimeComplexity("O(1)")
     public Iterable<Edge<E>> outgoingEdges(Vertex<V> v) throws IllegalArgumentException {
         GraphVertex<V> vertex = validate(v);
         return vertex.getOutgoing().values();
     }
 
     @Override
+    @TimeComplexity("O(1)")
     public Iterable<Edge<E>> incomingEdges(Vertex<V> v) throws IllegalArgumentException {
         GraphVertex<V> vertex = validate(v);
         return vertex.getIncoming().values();
     }
 
     @Override
+    @TimeComplexityExpected("O(1)")
     public Edge<E> getEdge(Vertex<V> u, Vertex<V> v) throws IllegalArgumentException {
         GraphVertex<V> vertex = validate(u);
         return vertex.getOutgoing().get(v);
@@ -204,6 +213,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#endVertices(net.datastructures.Edge)
      */
+    @TimeComplexity("O(1)")
     public Vertex<V>[] endVertices(Edge<E> e) throws IllegalArgumentException {
         GraphEdge<E> edge = validate(e);
         return edge.getEndpoints();
@@ -213,6 +223,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#insertEdge(net.datastructures.Vertex, net.datastructures.Vertex, java.lang.Object)
      */
+    @TimeComplexityExpected("O(1)")
     public Edge<E> insertEdge(Vertex<V> u, Vertex<V> v, E o) throws IllegalArgumentException {
         if (getEdge(u, v) == null) {                         // Tests if an edge exists
             GraphEdge<E> edge = new GraphEdge<>(u, v, o);   // If edge doesn't exists, create a new GraphEdge.
@@ -230,6 +241,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#insertVertex(java.lang.Object)
      */
+    @TimeComplexity("O(1)")
     public Vertex<V> insertVertex(V o) {
         GraphVertex<V> vertex = new GraphVertex<>(o, isDirected);   // Creates a new GraphVertex
         vertex.setPosition(vertices.addLast(vertex));               // Set it's position to the end of the vertices list.
@@ -239,6 +251,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#opposite(net.datastructures.Vertex, net.datastructures.Edge)
      */
+    @TimeComplexity("O(1)")
     public Vertex<V> opposite(Vertex<V> v, Edge<E> e) throws IllegalArgumentException {
         GraphEdge<E> edge = validate(e);
         GraphVertex<V> vertex = validate(v);
@@ -255,8 +268,14 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#removeEdge(net.datastructures.Edge)
      */
+    @TimeComplexityExpected("O(1)")
     public void removeEdge(Edge<E> e) throws IllegalArgumentException {
         GraphEdge<E> edge = validate(e);
+        Vertex<V>[] endpoints = edge.getEndpoints();
+
+        ((GraphVertex<V>)endpoints[0]).getOutgoing().remove(endpoints[1]);
+        ((GraphVertex<V>)endpoints[1]).getIncoming().remove(endpoints[0]);
+
         edges.remove(edge.getPosition());
         edge.setPosition(null);
     }
@@ -264,6 +283,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#removeVertex(net.datastructures.Vertex)
      */
+    @TimeComplexity("O(n)")
     public void removeVertex(Vertex<V> v) throws IllegalArgumentException {
         GraphVertex<V> vertex = validate(v);
         for (Edge<E> e : vertex.getIncoming().values()) {   // Remove all edges incoming to the vertex
@@ -279,6 +299,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /*
      * replace the element in edge object, return the old element
      */
+    @TimeComplexity("O(1)")
     public E replace(Edge<E> e, E o) throws IllegalArgumentException {
         GraphEdge<E> edge = validate(e);
         E oldE = edge.getElement();
@@ -289,6 +310,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /*
      * replace the element in vertex object, return the old element
      */
+    @TimeComplexity("O(1)")
     public V replace(Vertex<V> v, V o) throws IllegalArgumentException {
         GraphVertex<V> vertex = validate(v);
         V oldV = vertex.getElement();
