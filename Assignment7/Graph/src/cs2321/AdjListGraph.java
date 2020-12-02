@@ -204,7 +204,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     }
 
     @Override
-    @TimeComplexityExpected("O(1)")
+    @TimeComplexity("O(1)")
     public Edge<E> getEdge(Vertex<V> u, Vertex<V> v) throws IllegalArgumentException {
         GraphVertex<V> vertex = validate(u);
         return vertex.getOutgoing().get(v);
@@ -223,7 +223,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#insertEdge(net.datastructures.Vertex, net.datastructures.Vertex, java.lang.Object)
      */
-    @TimeComplexityExpected("O(1)")
+    @TimeComplexity("O(1)")
     public Edge<E> insertEdge(Vertex<V> u, Vertex<V> v, E o) throws IllegalArgumentException {
         if (getEdge(u, v) == null) {                         // Tests if an edge exists
             GraphEdge<E> edge = new GraphEdge<>(u, v, o);   // If edge doesn't exists, create a new GraphEdge.
@@ -268,7 +268,7 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
     /* (non-Javadoc)
      * @see net.datastructures.Graph#removeEdge(net.datastructures.Edge)
      */
-    @TimeComplexityExpected("O(1)")
+    @TimeComplexity("O(1)")
     public void removeEdge(Edge<E> e) throws IllegalArgumentException {
         GraphEdge<E> edge = validate(e);
         Vertex<V>[] endpoints = edge.getEndpoints();
@@ -285,6 +285,12 @@ public class AdjListGraph<V, E> implements Graph<V, E> {
      */
     @TimeComplexity("O(n)")
     public void removeVertex(Vertex<V> v) throws IllegalArgumentException {
+        /* TCJ
+         * Assume vertex v has n edges in either an undirected or directed graph.
+         * The two loops will loop through all n edges and call removeEdge() n times.
+         * removeEdge, getIncoming, values, validate, remove, getPosition, and setPosition are all O(1)
+         * Therefore, the worst case time complexity is O(n)
+         */
         GraphVertex<V> vertex = validate(v);
         for (Edge<E> e : vertex.getIncoming().values()) {   // Remove all edges incoming to the vertex
             removeEdge(e);
