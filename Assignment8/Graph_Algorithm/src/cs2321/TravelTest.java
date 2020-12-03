@@ -2,6 +2,7 @@ package cs2321;
 
 import static org.junit.Assert.*;
 
+import cs2321.DLL.DoublyLinkedList;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -90,7 +91,7 @@ public class TravelTest {
 
 	
 	@Test
-	public void testDijkstraRoute() {
+	public void testDijkstraRoute1() {
 		String[] expected= {"A","D","C"};
 		java.util.ArrayList<String> list = new java.util.ArrayList<String>();
 		DoublyLinkedList<String> path = new DoublyLinkedList<String>();
@@ -105,7 +106,7 @@ public class TravelTest {
 	}
 	
 	@Test
-	public void testDijkstraRoute1() {
+	public void testDijkstraRoute2() {
 		String[] expected= {"B","A","D","C"};
 		java.util.ArrayList<String> list = new java.util.ArrayList<String>();
 		DoublyLinkedList<String> path = new DoublyLinkedList<String>();
