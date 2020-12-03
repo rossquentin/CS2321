@@ -1,4 +1,4 @@
-package cs2321;
+package cs2321.Map;
 
 import net.datastructures.List;
 
