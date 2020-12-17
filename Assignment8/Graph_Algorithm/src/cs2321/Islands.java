@@ -13,7 +13,6 @@ public class Islands  {
 	 * 					-1 means there is no edge between island[i] and island[j]. 
 	 */
 	public Islands(int numOfIslands, int distance[][]) {
-		
 		//TODO: complete the constructor
 		
 	}

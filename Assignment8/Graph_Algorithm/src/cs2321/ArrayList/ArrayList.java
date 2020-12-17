@@ -1,6 +1,7 @@
-package cs2321.Map;
+package cs2321.ArrayList;
 
 import net.datastructures.List;
+
 
 import java.util.Iterator;
 
@@ -19,8 +20,8 @@ public class ArrayList<E> implements List<E> {
      * Creates a new data array with a capacity of 16.
      */
     @SuppressWarnings("unchecked")
-	public ArrayList() {
-	    // Creates a new array with size 16.
+    public ArrayList() {
+        // Creates a new array with size 16.
         arr = (E[]) new Object[16];
         this.capacity = 16;
     }
@@ -45,8 +46,8 @@ public class ArrayList<E> implements List<E> {
      * @throws IndexOutOfBoundsException when i is not in the interval [0,size)
      */
     private void checkIndex(int i, int size) throws IndexOutOfBoundsException {
-	    if (i < 0 || i >= size) {
-	        throw new IndexOutOfBoundsException("Illegal index: " + i);
+        if (i < 0 || i >= size) {
+            throw new IndexOutOfBoundsException("Illegal index: " + i);
         }
     }
 
@@ -54,19 +55,19 @@ public class ArrayList<E> implements List<E> {
      * Returns the number of elements in the list.
      * @return the number of elements in the list
      */
-	@Override
-	public int size() {
-		return size;
-	}
+    @Override
+    public int size() {
+        return size;
+    }
 
     /**
      * Tests if the list is empty.
      * @return true if the list is empty, false otherwise
      */
-	@Override
-	public boolean isEmpty() {
-		return size == 0;
-	}
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
     /**
      * Returns, but does not remove, the element at index i.
@@ -74,13 +75,13 @@ public class ArrayList<E> implements List<E> {
      * @return the element at the specified index
      * @throws IndexOutOfBoundsException if i is not in the interval [0,size)
      */
-	@Override
-	public E get(int i) throws IndexOutOfBoundsException {
-	    // Checks if the index is in the interval [0,size)
+    @Override
+    public E get(int i) throws IndexOutOfBoundsException {
+        // Checks if the index is in the interval [0,size)
         checkIndex(i, size);
 
-		return arr[i];
-	}
+        return arr[i];
+    }
 
     /**
      * Replaces the element at index i and returns the replaced element.
@@ -89,8 +90,8 @@ public class ArrayList<E> implements List<E> {
      * @return the replaced element
      * @throws IndexOutOfBoundsException if i is not in the interval [0,size)
      */
-	@Override
-	public E set(int i, E e) throws IndexOutOfBoundsException {
+    @Override
+    public E set(int i, E e) throws IndexOutOfBoundsException {
         // Checks if the index is in the interval [0,size)
         checkIndex(i, size);
 
@@ -100,8 +101,8 @@ public class ArrayList<E> implements List<E> {
         // Replaces the element at index i with the given element e.
         arr[i] = e;
 
-		return tmp;
-	}
+        return tmp;
+    }
 
     /**
      * Inserts an element at index i and shifts all subsequent
@@ -110,8 +111,8 @@ public class ArrayList<E> implements List<E> {
      * @param  e   the new element to be stored
      * @throws IndexOutOfBoundsException if i is not in the interval [0,size)
      */
-	@Override
-	public void add(int i, E e) throws IndexOutOfBoundsException {
+    @Override
+    public void add(int i, E e) throws IndexOutOfBoundsException {
         // Checks if the index is in the interval [0,size)
         checkIndex(i, size+1);
 
@@ -130,7 +131,7 @@ public class ArrayList<E> implements List<E> {
 
         // Increases the size by one.
         size++;
-	}
+    }
 
     /**
      * Removes the element at index i and shifts all subsequent
@@ -139,8 +140,8 @@ public class ArrayList<E> implements List<E> {
      * @return the removed element.
      * @throws IndexOutOfBoundsException if i is not in the interval [0,size)
      */
-	@Override
-	public E remove(int i) throws IndexOutOfBoundsException {
+    @Override
+    public E remove(int i) throws IndexOutOfBoundsException {
         // Checks if the index is in the interval [0,size)
         checkIndex(i, size);
 
@@ -154,20 +155,23 @@ public class ArrayList<E> implements List<E> {
             arr[j] = arr[j+1];
         }
 
+        // Set end of array to null. This element does not exist.
+        arr[size-1] = null;
+
         // Reduces the size by one.
         size--;
 
         return val;
-	}
+    }
 
     /**
      * Returns a new iterator object for the array list.
      * @return an array list iterator
      */
-	@Override
-	public Iterator<E> iterator() {
-		return new arrayIterator();
-	}
+    @Override
+    public Iterator<E> iterator() {
+        return new arrayIterator();
+    }
 
     /**
      * Implementation of an iterator for the
@@ -200,65 +204,73 @@ public class ArrayList<E> implements List<E> {
      * Inserts an element at the beginning of the array list.
      * @param e the element to be stored
      */
-	public void addFirst(E e)  {
+    public void addFirst(E e)  {
         add(0,e);
-	}
+    }
 
     /**
      * Inserts an element at the end of the array list.
      * @param e the element to be stored
      */
-	public void addLast(E e)  {
+    public void addLast(E e)  {
         add(size, e);
-	}
+    }
 
     /**
      * Removes the first element of the array list and returns it's element.
      * @return the removed element
      * @throws IndexOutOfBoundsException if i is not in the interval [0,size)
      */
-	public E removeFirst() throws IndexOutOfBoundsException {
-		return remove(0);
-	}
+    public E removeFirst() throws IndexOutOfBoundsException {
+        return remove(0);
+    }
 
     /**
      * Removes the last element of the array list and returns it's element.
      * @return the removed element
      * @throws IndexOutOfBoundsException if i is not in the interval [0,size)
      */
-	public E removeLast() throws IndexOutOfBoundsException {
-		return remove(size-1);
-	}
+    public E removeLast() throws IndexOutOfBoundsException {
+        return remove(size-1);
+    }
 
     /**
      * Returns the capacity of the array list.
      * @return the capacity of the array list.
      */
-	public int capacity() {
-		return capacity;
-	}
+    public int capacity() {
+        return capacity;
+    }
 
     /**
      * Tests if the size is greater than or equal to the capacity.
      * If true, copy the data to a new array double the capacity.
      */
     @SuppressWarnings("unchecked")
-	private void checkCapacity() {
+    private void checkCapacity() {
 
-	    // Checks if the size is larger or equal to the capacity.
-	    if(size >= capacity) {
-	        // Doubles the capacity.
-	        capacity *= 2;
+        // Checks if the size is larger or equal to the capacity.
+        if(size >= capacity) {
+            // Doubles the capacity.
+            capacity *= 2;
 
-	        // Creates a new array to copy the
+            // Creates a new array to copy the
             // original data to.
-	        E[] tmp = (E[]) new Object[capacity];
+            E[] tmp = (E[]) new Object[capacity];
 
-	        // Copies the data from array arr to array tmp.
+            // Copies the data from array arr to array tmp.
             System.arraycopy(arr, 0, tmp, 0, arr.length);
 
             // Sets the global array arr to array tmp.
             arr = tmp;
         }
+    }
+
+    /**
+     * Converts the arraylist to an array.
+     * @return the data array
+     */
+    public E[] toArray() {
+        return arr;
     }
 }

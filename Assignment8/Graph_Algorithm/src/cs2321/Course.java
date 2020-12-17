@@ -17,7 +17,6 @@ public class Course {
 	 * 
 	 */
 	public Course(String courses[][]) {
-		
 		//TODO: complete the constructor
 		
 	}

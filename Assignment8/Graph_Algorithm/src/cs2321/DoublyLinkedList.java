@@ -1,4 +1,4 @@
-package cs2321.DLL;
+package cs2321;
 import net.datastructures.Position;
 import net.datastructures.PositionalList;
 
